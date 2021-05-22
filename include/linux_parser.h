@@ -41,6 +41,7 @@ enum CPUStates {
   kGuestNice_
 };
 std::vector<int> CpuUtilization();
+float CpuUtilization(int pid);
 
 // Processes
 std::string Command(int pid);

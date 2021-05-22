@@ -37,15 +37,14 @@ int System::RunningProcesses() { return LinuxParser::RunningProcesses(); }
 // DONE: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
-// TODO: Return a container composed of the system's processes
+// DONE: Return a container composed of the system's processes
 vector<Process>& System::Processes() {
   processes_.clear();
   vector<int> pids = LinuxParser::Pids();
 
-  //   for (auto pid : pids) {
-  //     processes_.push_back(Process(pid));  // FIXME: int to process
-  //     conversion
-  //   }
+  for (auto pid : pids) {
+    processes_.push_back(Process(pid));
+  }
 
   std::sort(processes_.begin(), processes_.end());
 
