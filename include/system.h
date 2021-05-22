@@ -9,14 +9,14 @@
 
 class System {
  public:
-  Processor& Cpu();
-  std::vector<Process>& Processes();
+  std::string OperatingSystem();
+  std::string Kernel();
   float MemoryUtilization();
   long UpTime();
   int TotalProcesses();
   int RunningProcesses();
-  std::string Kernel();
-  std::string OperatingSystem();
+  Processor& Cpu();
+  std::vector<Process>& Processes();
 
  private:
   Processor cpu_ = {};
