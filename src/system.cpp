@@ -17,7 +17,7 @@ using std::string;
 using std::vector;
 
 // DONE: Return the operating system name
-std::string System::OperatingSystem() { return string(); }
+std::string System::OperatingSystem() { return LinuxParser::OperatingSystem(); }
 
 // DONE: Return the system's kernel identifier (string)
 std::string System::Kernel() { return LinuxParser::Kernel(); }
