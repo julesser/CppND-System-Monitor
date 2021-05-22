@@ -125,21 +125,29 @@ int LinuxParser::RunningProcesses() {
 // CPU IMPLEMENTATIONS
 // ###################
 
-// TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() { return {}; }
-
-// TODO: Read and return the number of jiffies for the system
-long LinuxParser::Jiffies() { return 0; }
-
-// TODO: Read and return the number of active jiffies for a PID
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::ActiveJiffies(int pid [[maybe_unused]]) { return 0; }
-
-// TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { return 0; }
-
-// TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { return 0; }
+// DONE: Read and return CPU utilization
+vector<int> LinuxParser::CpuUtilization() {
+  // declare variables
+  string line, key;
+  int user, nice, system, idle, iowait, irq, softirq, steal, guest, guestNice;
+  vector<int> cpuValues;
+  // read numbers from file
+  std::ifstream filestream(kProcDirectory + kStatFilename);
+  if (filestream.is_open()) {
+    while (std::getline(filestream, line)) {
+      std::istringstream linestream(line);
+      while (linestream >> key >> user >> nice >> system >> idle >> iowait >>
+             irq >> softirq >> steal >> guest >> guestNice) {
+        if (key == "cpu") {
+          cpuValues = {user, nice,    system, idle,  iowait,
+                       irq,  softirq, steal,  guest, guestNice};
+          return cpuValues;
+        }
+      }
+    }
+  }
+  return cpuValues;
+}
 
 // #######################
 // PROCESS IMPLEMENTATIONS
